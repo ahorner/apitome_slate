@@ -1,5 +1,14 @@
 module Apitome
   module DocsHelper
+    def highlighted_readme
+      return unless Apitome.configuration.readme
+
+      file = Apitome.configuration.root.join(Apitome.configuration.doc_path, Apitome.configuration.readme)
+      raise Apitome::FileNotFoundError.new("Unable to find #{file}") unless File.exist?(file)
+
+      highlighted_markdown(open(file).read)
+    end
+
     def request_code(request)
       format_code [
         format_request_path(request),
@@ -14,6 +23,15 @@ module Apitome
         format_headers(request, type: :response),
         format_body(request, type: :response)
       ].join("\n")
+    end
+
+    def highlighted_markdown(string)
+      Kramdown::Document.new(
+        string,
+        syntax_highlighter: :rouge,
+        syntax_highlighter_opts: { css_class: 'highlight' },
+        parse_block_html: true,
+      ).to_html
     end
 
     private
