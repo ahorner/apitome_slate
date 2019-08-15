@@ -1,3 +1,4 @@
+require 'apitome'
 require 'rouge'
 require 'sass-rails'
 require 'jquery-rails'
