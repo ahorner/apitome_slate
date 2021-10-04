@@ -46,7 +46,7 @@
               <% end %>
             </td>
             <td class='value'>
-              <%= parameter['description'] %>
+              <%= raw rendered_markdown(parameter['description']) if parameter['description'] %>
             </td>
           </tr>
         <% end %>
@@ -77,7 +77,7 @@
               <span class='type'><%= attribute['type'] %></span>
             </td>
             <td class='value'>
-              <%= attribute['description'] %>
+              <%= raw rendered_markdown(attribute['description']) if attribute['description'] %>
             </td>
           </tr>
         <% end %>

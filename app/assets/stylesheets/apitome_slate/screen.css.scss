@@ -416,6 +416,9 @@ html, body {
 
     td {
       padding: 10px;
+      &>p:last-child {
+        margin-bottom: 0;
+      }
     }
 
     tr:last-child {
